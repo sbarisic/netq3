@@ -188,6 +188,7 @@ UI_CDKeyMenu_Init
 */
 static void UI_CDKeyMenu_Init( void ) {
 	trap_Cvar_Set( "ui_cdkeychecked", "1" );
+	return; // Remove CD key check
 
 	UI_CDKeyMenu_Cache();
 

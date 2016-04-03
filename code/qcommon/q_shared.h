@@ -27,33 +27,33 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 // A user mod should never modify this file
 
 #ifdef STANDALONE
-  #define PRODUCT_NAME				"iofoo3"
-  #define BASEGAME					"foobar"
-  #define CLIENT_WINDOW_TITLE		"changeme"
-  #define CLIENT_WINDOW_MIN_TITLE	"changeme2"
-  #define HOMEPATH_NAME_UNIX		".foo"
-  #define HOMEPATH_NAME_WIN			"FooBar"
-  #define HOMEPATH_NAME_MACOSX		HOMEPATH_NAME_WIN
+#define PRODUCT_NAME				"iofoo3"
+#define BASEGAME					"foobar"
+#define CLIENT_WINDOW_TITLE		"changeme"
+#define CLIENT_WINDOW_MIN_TITLE	"changeme2"
+#define HOMEPATH_NAME_UNIX		".foo"
+#define HOMEPATH_NAME_WIN			"FooBar"
+#define HOMEPATH_NAME_MACOSX		HOMEPATH_NAME_WIN
 //  #define STEAMPATH_NAME			"Foo Bar"
 //  #define STEAMPATH_APPID         ""
-  #define GAMENAME_FOR_MASTER		"foobar"	// must NOT contain whitespace
-  #define CINEMATICS_LOGO		"foologo.roq"
-  #define CINEMATICS_INTRO		"intro.roq"
+#define GAMENAME_FOR_MASTER		"foobar"	// must NOT contain whitespace
+#define CINEMATICS_LOGO		"foologo.roq"
+#define CINEMATICS_INTRO		"intro.roq"
 //  #define LEGACY_PROTOCOL	// You probably don't need this for your standalone game
 #else
-  #define PRODUCT_NAME				"ioq3"
-  #define BASEGAME					"baseq3"
-  #define CLIENT_WINDOW_TITLE		"ioquake3"
-  #define CLIENT_WINDOW_MIN_TITLE	"ioq3"
-  #define HOMEPATH_NAME_UNIX		".q3a"
-  #define HOMEPATH_NAME_WIN			"Quake3"
-  #define HOMEPATH_NAME_MACOSX		HOMEPATH_NAME_WIN
-  #define STEAMPATH_NAME			"Quake 3 Arena"
-  #define STEAMPATH_APPID			"2200"
-  #define GAMENAME_FOR_MASTER		"Quake3Arena"
-  #define CINEMATICS_LOGO		"idlogo.RoQ"
-  #define CINEMATICS_INTRO		"intro.RoQ"
-  #define LEGACY_PROTOCOL
+#define PRODUCT_NAME				"ioq3"
+#define BASEGAME					"baseq3"
+#define CLIENT_WINDOW_TITLE		"ioquake3"
+#define CLIENT_WINDOW_MIN_TITLE	"ioq3"
+#define HOMEPATH_NAME_UNIX		".q3a"
+#define HOMEPATH_NAME_WIN			"Quake3"
+#define HOMEPATH_NAME_MACOSX		HOMEPATH_NAME_WIN
+#define STEAMPATH_NAME			"Quake 3 Arena"
+#define STEAMPATH_APPID			"2200"
+#define GAMENAME_FOR_MASTER		"Quake3Arena"
+#define CINEMATICS_LOGO		"idlogo.RoQ"
+#define CINEMATICS_INTRO		"intro.RoQ"
+#define LEGACY_PROTOCOL
 #endif
 
 // Heartbeat for dpmaster protocol. You shouldn't change this unless you know what you're doing
@@ -67,7 +67,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #define BASETA				"missionpack"
 
 #ifndef PRODUCT_VERSION
-  #define PRODUCT_VERSION "1.36"
+#define PRODUCT_VERSION "1.36"
 #endif
 
 #define Q3_VERSION PRODUCT_NAME " " PRODUCT_VERSION
@@ -161,24 +161,24 @@ typedef int intptr_t;
 #include <limits.h>
 
 #ifdef _MSC_VER
-  #include <io.h>
+#include <io.h>
 
-  typedef __int64 int64_t;
-  typedef __int32 int32_t;
-  typedef __int16 int16_t;
-  typedef __int8 int8_t;
-  typedef unsigned __int64 uint64_t;
-  typedef unsigned __int32 uint32_t;
-  typedef unsigned __int16 uint16_t;
-  typedef unsigned __int8 uint8_t;
+typedef __int64 int64_t;
+typedef __int32 int32_t;
+typedef __int16 int16_t;
+typedef __int8 int8_t;
+typedef unsigned __int64 uint64_t;
+typedef unsigned __int32 uint32_t;
+typedef unsigned __int16 uint16_t;
+typedef unsigned __int8 uint8_t;
 
-  // vsnprintf is ISO/IEC 9899:1999
-  // abstracting this to make it portable
-  int Q_vsnprintf(char *str, size_t size, const char *format, va_list ap);
+// vsnprintf is ISO/IEC 9899:1999
+// abstracting this to make it portable
+int Q_vsnprintf(char *str, size_t size, const char *format, va_list ap);
 #else
-  #include <stdint.h>
+#include <stdint.h>
 
-  #define Q_vsnprintf vsnprintf
+#define Q_vsnprintf vsnprintf
 #endif
 
 #endif
@@ -186,11 +186,13 @@ typedef int intptr_t;
 
 #include "q_platform.h"
 
-//=============================================================
+ //=============================================================
 
 typedef unsigned char 		byte;
 
-typedef enum {qfalse, qtrue}	qboolean;
+typedef enum {
+	qfalse, qtrue
+}	qboolean;
 
 typedef union {
 	float f;
@@ -320,7 +322,7 @@ typedef enum {
 #define UI_PULSE		0x00004000
 
 #if !defined(NDEBUG) && !defined(BSPC)
-	#define HUNK_DEBUG
+#define HUNK_DEBUG
 #endif
 
 typedef enum {
@@ -331,9 +333,9 @@ typedef enum {
 
 #ifdef HUNK_DEBUG
 #define Hunk_Alloc( size, preference )				Hunk_AllocDebug(size, preference, #size, __FILE__, __LINE__)
-void *Hunk_AllocDebug( int size, ha_pref preference, char *label, char *file, int line );
+void *Hunk_AllocDebug(int size, ha_pref preference, char *label, char *file, int line);
 #else
-void *Hunk_Alloc( int size, ha_pref preference );
+void *Hunk_Alloc(int size, ha_pref preference);
 #endif
 
 #define Com_Memset memset
@@ -443,30 +445,30 @@ extern	vec3_t	axisDefault[3];
 int Q_isnan(float x);
 
 #if idx64
-  extern long qftolsse(float f);
-  extern int qvmftolsse(void);
-  extern void qsnapvectorsse(vec3_t vec);
+extern long qftolsse(float f);
+extern int qvmftolsse(void);
+extern void qsnapvectorsse(vec3_t vec);
 
-  #define Q_ftol qftolsse
-  #define Q_SnapVector qsnapvectorsse
+#define Q_ftol qftolsse
+#define Q_SnapVector qsnapvectorsse
 
-  extern int (*Q_VMftol)(void);
+extern int(*Q_VMftol)(void);
 #elif id386
-  extern long QDECL qftolx87(float f);
-  extern long QDECL qftolsse(float f);
-  extern int QDECL qvmftolx87(void);
-  extern int QDECL qvmftolsse(void);
-  extern void QDECL qsnapvectorx87(vec3_t vec);
-  extern void QDECL qsnapvectorsse(vec3_t vec);
+extern long QDECL qftolx87(float f);
+extern long QDECL qftolsse(float f);
+extern int QDECL qvmftolx87(void);
+extern int QDECL qvmftolsse(void);
+extern void QDECL qsnapvectorx87(vec3_t vec);
+extern void QDECL qsnapvectorsse(vec3_t vec);
 
-  extern long (QDECL *Q_ftol)(float f);
-  extern int (QDECL *Q_VMftol)(void);
-  extern void (QDECL *Q_SnapVector)(vec3_t vec);
+extern long (QDECL *Q_ftol)(float f);
+extern int (QDECL *Q_VMftol)(void);
+extern void (QDECL *Q_SnapVector)(vec3_t vec);
 #else
-  // Q_ftol must expand to a function name so the pluggable renderer can take
-  // its address
-  #define Q_ftol lrintf
-  #define Q_SnapVector(vec)\
+// Q_ftol must expand to a function name so the pluggable renderer can take
+// its address
+#define Q_ftol lrintf
+#define Q_SnapVector(vec)\
 	do\
 	{\
 		vec3_t *temp = (vec);\
@@ -496,41 +498,41 @@ int Q_isnan(float x);
 
 #if idppc
 
-static ID_INLINE float Q_rsqrt( float number ) {
-		float x = 0.5f * number;
-                float y;
+static ID_INLINE float Q_rsqrt(float number) {
+	float x = 0.5f * number;
+	float y;
 #ifdef __GNUC__            
-                asm("frsqrte %0,%1" : "=f" (y) : "f" (number));
+	asm("frsqrte %0,%1" : "=f" (y) : "f" (number));
 #else
-		y = __frsqrte( number );
+	y = __frsqrte(number);
 #endif
-		return y * (1.5f - (x * y * y));
-	}
+	return y * (1.5f - (x * y * y));
+}
 
 #ifdef __GNUC__            
 static ID_INLINE float Q_fabs(float x) {
-    float abs_x;
-    
-    asm("fabs %0,%1" : "=f" (abs_x) : "f" (x));
-    return abs_x;
+	float abs_x;
+
+	asm("fabs %0,%1" : "=f" (abs_x) : "f" (x));
+	return abs_x;
 }
 #else
 #define Q_fabs __fabsf
 #endif
 
 #else
-float Q_fabs( float f );
-float Q_rsqrt( float f );		// reciprocal square root
+float Q_fabs(float f);
+float Q_rsqrt(float f);		// reciprocal square root
 #endif
 
 #define SQRTFAST( x ) ( (x) * Q_rsqrt( x ) )
 
-signed char ClampChar( int i );
-signed short ClampShort( int i );
+signed char ClampChar(int i);
+signed short ClampShort(int i);
 
 // this isn't a real cheap function to call!
-int DirToByte( vec3_t dir );
-void ByteToDir( int b, vec3_t dir );
+int DirToByte(vec3_t dir);
+void ByteToDir(int b, vec3_t dir);
 
 #if	1
 
@@ -572,148 +574,147 @@ typedef struct {
 
 #define	SnapVector(v) {v[0]=((int)(v[0]));v[1]=((int)(v[1]));v[2]=((int)(v[2]));}
 // just in case you don't want to use the macros
-vec_t _DotProduct( const vec3_t v1, const vec3_t v2 );
-void _VectorSubtract( const vec3_t veca, const vec3_t vecb, vec3_t out );
-void _VectorAdd( const vec3_t veca, const vec3_t vecb, vec3_t out );
-void _VectorCopy( const vec3_t in, vec3_t out );
-void _VectorScale( const vec3_t in, float scale, vec3_t out );
-void _VectorMA( const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc );
+vec_t _DotProduct(const vec3_t v1, const vec3_t v2);
+void _VectorSubtract(const vec3_t veca, const vec3_t vecb, vec3_t out);
+void _VectorAdd(const vec3_t veca, const vec3_t vecb, vec3_t out);
+void _VectorCopy(const vec3_t in, vec3_t out);
+void _VectorScale(const vec3_t in, float scale, vec3_t out);
+void _VectorMA(const vec3_t veca, float scale, const vec3_t vecb, vec3_t vecc);
 
-unsigned ColorBytes3 (float r, float g, float b);
-unsigned ColorBytes4 (float r, float g, float b, float a);
+unsigned ColorBytes3(float r, float g, float b);
+unsigned ColorBytes4(float r, float g, float b, float a);
 
-float NormalizeColor( const vec3_t in, vec3_t out );
+float NormalizeColor(const vec3_t in, vec3_t out);
 
-float RadiusFromBounds( const vec3_t mins, const vec3_t maxs );
-void ClearBounds( vec3_t mins, vec3_t maxs );
-void AddPointToBounds( const vec3_t v, vec3_t mins, vec3_t maxs );
+float RadiusFromBounds(const vec3_t mins, const vec3_t maxs);
+void ClearBounds(vec3_t mins, vec3_t maxs);
+void AddPointToBounds(const vec3_t v, vec3_t mins, vec3_t maxs);
 
 #if !defined( Q3_VM ) || ( defined( Q3_VM ) && defined( __Q3_VM_MATH ) )
-static ID_INLINE int VectorCompare( const vec3_t v1, const vec3_t v2 ) {
+static ID_INLINE int VectorCompare(const vec3_t v1, const vec3_t v2) {
 	if (v1[0] != v2[0] || v1[1] != v2[1] || v1[2] != v2[2]) {
 		return 0;
-	}			
+	}
 	return 1;
 }
 
-static ID_INLINE vec_t VectorLength( const vec3_t v ) {
-	return (vec_t)sqrt (v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+static ID_INLINE vec_t VectorLength(const vec3_t v) {
+	return (vec_t)sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
 
-static ID_INLINE vec_t VectorLengthSquared( const vec3_t v ) {
-	return (v[0]*v[0] + v[1]*v[1] + v[2]*v[2]);
+static ID_INLINE vec_t VectorLengthSquared(const vec3_t v) {
+	return (v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
 
-static ID_INLINE vec_t Distance( const vec3_t p1, const vec3_t p2 ) {
+static ID_INLINE vec_t Distance(const vec3_t p1, const vec3_t p2) {
 	vec3_t	v;
 
-	VectorSubtract (p2, p1, v);
-	return VectorLength( v );
+	VectorSubtract(p2, p1, v);
+	return VectorLength(v);
 }
 
-static ID_INLINE vec_t DistanceSquared( const vec3_t p1, const vec3_t p2 ) {
+static ID_INLINE vec_t DistanceSquared(const vec3_t p1, const vec3_t p2) {
 	vec3_t	v;
 
-	VectorSubtract (p2, p1, v);
-	return v[0]*v[0] + v[1]*v[1] + v[2]*v[2];
+	VectorSubtract(p2, p1, v);
+	return v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
 }
 
 // fast vector normalize routine that does not check to make sure
 // that length != 0, nor does it return length, uses rsqrt approximation
-static ID_INLINE void VectorNormalizeFast( vec3_t v )
-{
+static ID_INLINE void VectorNormalizeFast(vec3_t v) {
 	float ilength;
 
-	ilength = Q_rsqrt( DotProduct( v, v ) );
+	ilength = Q_rsqrt(DotProduct(v, v));
 
 	v[0] *= ilength;
 	v[1] *= ilength;
 	v[2] *= ilength;
 }
 
-static ID_INLINE void VectorInverse( vec3_t v ){
+static ID_INLINE void VectorInverse(vec3_t v) {
 	v[0] = -v[0];
 	v[1] = -v[1];
 	v[2] = -v[2];
 }
 
-static ID_INLINE void CrossProduct( const vec3_t v1, const vec3_t v2, vec3_t cross ) {
-	cross[0] = v1[1]*v2[2] - v1[2]*v2[1];
-	cross[1] = v1[2]*v2[0] - v1[0]*v2[2];
-	cross[2] = v1[0]*v2[1] - v1[1]*v2[0];
+static ID_INLINE void CrossProduct(const vec3_t v1, const vec3_t v2, vec3_t cross) {
+	cross[0] = v1[1] * v2[2] - v1[2] * v2[1];
+	cross[1] = v1[2] * v2[0] - v1[0] * v2[2];
+	cross[2] = v1[0] * v2[1] - v1[1] * v2[0];
 }
 
 #else
-int VectorCompare( const vec3_t v1, const vec3_t v2 );
+int VectorCompare(const vec3_t v1, const vec3_t v2);
 
-vec_t VectorLength( const vec3_t v );
+vec_t VectorLength(const vec3_t v);
 
-vec_t VectorLengthSquared( const vec3_t v );
+vec_t VectorLengthSquared(const vec3_t v);
 
-vec_t Distance( const vec3_t p1, const vec3_t p2 );
+vec_t Distance(const vec3_t p1, const vec3_t p2);
 
-vec_t DistanceSquared( const vec3_t p1, const vec3_t p2 );
+vec_t DistanceSquared(const vec3_t p1, const vec3_t p2);
 
-void VectorNormalizeFast( vec3_t v );
+void VectorNormalizeFast(vec3_t v);
 
-void VectorInverse( vec3_t v );
+void VectorInverse(vec3_t v);
 
-void CrossProduct( const vec3_t v1, const vec3_t v2, vec3_t cross );
+void CrossProduct(const vec3_t v1, const vec3_t v2, vec3_t cross);
 
 #endif
 
-vec_t VectorNormalize (vec3_t v);		// returns vector length
-vec_t VectorNormalize2( const vec3_t v, vec3_t out );
-void Vector4Scale( const vec4_t in, vec_t scale, vec4_t out );
-void VectorRotate( vec3_t in, vec3_t matrix[3], vec3_t out );
+vec_t VectorNormalize(vec3_t v);		// returns vector length
+vec_t VectorNormalize2(const vec3_t v, vec3_t out);
+void Vector4Scale(const vec4_t in, vec_t scale, vec4_t out);
+void VectorRotate(vec3_t in, vec3_t matrix[3], vec3_t out);
 int Q_log2(int val);
 
 float Q_acos(float c);
 
-int		Q_rand( int *seed );
-float	Q_random( int *seed );
-float	Q_crandom( int *seed );
+int		Q_rand(int *seed);
+float	Q_random(int *seed);
+float	Q_crandom(int *seed);
 
 #define random()	((rand () & 0x7fff) / ((float)0x7fff))
 #define crandom()	(2.0 * (random() - 0.5))
 
-void vectoangles( const vec3_t value1, vec3_t angles);
-void AnglesToAxis( const vec3_t angles, vec3_t axis[3] );
+void vectoangles(const vec3_t value1, vec3_t angles);
+void AnglesToAxis(const vec3_t angles, vec3_t axis[3]);
 
-void AxisClear( vec3_t axis[3] );
-void AxisCopy( vec3_t in[3], vec3_t out[3] );
+void AxisClear(vec3_t axis[3]);
+void AxisCopy(vec3_t in[3], vec3_t out[3]);
 
-void SetPlaneSignbits( struct cplane_s *out );
-int BoxOnPlaneSide (vec3_t emins, vec3_t emaxs, struct cplane_s *plane);
+void SetPlaneSignbits(struct cplane_s *out);
+int BoxOnPlaneSide(vec3_t emins, vec3_t emaxs, struct cplane_s *plane);
 
 qboolean BoundsIntersect(const vec3_t mins, const vec3_t maxs,
-		const vec3_t mins2, const vec3_t maxs2);
+	const vec3_t mins2, const vec3_t maxs2);
 qboolean BoundsIntersectSphere(const vec3_t mins, const vec3_t maxs,
-		const vec3_t origin, vec_t radius);
+	const vec3_t origin, vec_t radius);
 qboolean BoundsIntersectPoint(const vec3_t mins, const vec3_t maxs,
-		const vec3_t origin);
+	const vec3_t origin);
 
 float	AngleMod(float a);
-float	LerpAngle (float from, float to, float frac);
-float	AngleSubtract( float a1, float a2 );
-void	AnglesSubtract( vec3_t v1, vec3_t v2, vec3_t v3 );
+float	LerpAngle(float from, float to, float frac);
+float	AngleSubtract(float a1, float a2);
+void	AnglesSubtract(vec3_t v1, vec3_t v2, vec3_t v3);
 
-float AngleNormalize360 ( float angle );
-float AngleNormalize180 ( float angle );
-float AngleDelta ( float angle1, float angle2 );
+float AngleNormalize360(float angle);
+float AngleNormalize180(float angle);
+float AngleDelta(float angle1, float angle2);
 
-qboolean PlaneFromPoints( vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c );
-void ProjectPointOnPlane( vec3_t dst, const vec3_t p, const vec3_t normal );
-void RotatePointAroundVector( vec3_t dst, const vec3_t dir, const vec3_t point, float degrees );
-void RotateAroundDirection( vec3_t axis[3], float yaw );
-void MakeNormalVectors( const vec3_t forward, vec3_t right, vec3_t up );
+qboolean PlaneFromPoints(vec4_t plane, const vec3_t a, const vec3_t b, const vec3_t c);
+void ProjectPointOnPlane(vec3_t dst, const vec3_t p, const vec3_t normal);
+void RotatePointAroundVector(vec3_t dst, const vec3_t dir, const vec3_t point, float degrees);
+void RotateAroundDirection(vec3_t axis[3], float yaw);
+void MakeNormalVectors(const vec3_t forward, vec3_t right, vec3_t up);
 // perpendicular vector could be replaced by this
 
 //int	PlaneTypeForNormal (vec3_t normal);
 
 void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]);
-void AngleVectors( const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
-void PerpendicularVector( vec3_t dst, const vec3_t src );
+void AngleVectors(const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
+void PerpendicularVector(vec3_t dst, const vec3_t src);
 
 #ifndef MAX
 #define MAX(x,y) ((x)>(y)?(x):(y))
@@ -725,21 +726,21 @@ void PerpendicularVector( vec3_t dst, const vec3_t src );
 
 //=============================================
 
-float Com_Clamp( float min, float max, float value );
+float Com_Clamp(float min, float max, float value);
 
-char	*COM_SkipPath( char *pathname );
-const char	*COM_GetExtension( const char *name );
+char	*COM_SkipPath(char *pathname);
+const char	*COM_GetExtension(const char *name);
 void	COM_StripExtension(const char *in, char *out, int destsize);
 qboolean COM_CompareExtension(const char *in, const char *ext);
-void	COM_DefaultExtension( char *path, int maxSize, const char *extension );
+void	COM_DefaultExtension(char *path, int maxSize, const char *extension);
 
-void	COM_BeginParseSession( const char *name );
-int		COM_GetCurrentParseLine( void );
-char	*COM_Parse( char **data_p );
-char	*COM_ParseExt( char **data_p, qboolean allowLineBreak );
-int		COM_Compress( char *data_p );
-void	COM_ParseError( char *format, ... ) __attribute__ ((format (printf, 1, 2)));
-void	COM_ParseWarning( char *format, ... ) __attribute__ ((format (printf, 1, 2)));
+void	COM_BeginParseSession(const char *name);
+int		COM_GetCurrentParseLine(void);
+char	*COM_Parse(char **data_p);
+char	*COM_ParseExt(char **data_p, qboolean allowLineBreak);
+int		COM_Compress(char *data_p);
+void	COM_ParseError(char *format, ...) __attribute__((format(printf, 1, 2)));
+void	COM_ParseWarning(char *format, ...) __attribute__((format(printf, 1, 2)));
 //int		COM_ParseInfos( char *buf, int max, char infos[][MAX_INFO_STRING] );
 
 #define MAX_TOKENLENGTH		1024
@@ -753,8 +754,7 @@ void	COM_ParseWarning( char *format, ... ) __attribute__ ((format (printf, 1, 2)
 #define TT_PUNCTUATION				5			// punctuation
 #endif
 
-typedef struct pc_token_s
-{
+typedef struct pc_token_s {
 	int type;
 	int subtype;
 	int intvalue;
@@ -764,22 +764,22 @@ typedef struct pc_token_s
 
 // data is an in/out parm, returns a parsed out token
 
-void	COM_MatchToken( char**buf_p, char *match );
+void	COM_MatchToken(char**buf_p, char *match);
 
-qboolean SkipBracedSection (char **program, int depth);
-void SkipRestOfLine ( char **data );
+qboolean SkipBracedSection(char **program, int depth);
+void SkipRestOfLine(char **data);
 
-void Parse1DMatrix (char **buf_p, int x, float *m);
-void Parse2DMatrix (char **buf_p, int y, int x, float *m);
-void Parse3DMatrix (char **buf_p, int z, int y, int x, float *m);
-int Com_HexStrToInt( const char *str );
+void Parse1DMatrix(char **buf_p, int x, float *m);
+void Parse2DMatrix(char **buf_p, int y, int x, float *m);
+void Parse3DMatrix(char **buf_p, int z, int y, int x, float *m);
+int Com_HexStrToInt(const char *str);
 
-int QDECL Com_sprintf (char *dest, int size, const char *fmt, ...) __attribute__ ((format (printf, 3, 4)));
+int QDECL Com_sprintf(char *dest, int size, const char *fmt, ...) __attribute__((format(printf, 3, 4)));
 
-char *Com_SkipTokens( char *s, int numTokens, char *sep );
-char *Com_SkipCharset( char *s, char *sep );
+char *Com_SkipTokens(char *s, int numTokens, char *sep);
+char *Com_SkipCharset(char *s, char *sep);
 
-void Com_RandomBytes( byte *string, int len );
+void Com_RandomBytes(byte *string, int len);
 
 // mode parm for FS_FOpenFile
 typedef enum {
@@ -797,29 +797,29 @@ typedef enum {
 
 //=============================================
 
-int Q_isprint( int c );
-int Q_islower( int c );
-int Q_isupper( int c );
-int Q_isalpha( int c );
-qboolean Q_isanumber( const char *s );
-qboolean Q_isintegral( float f );
+int Q_isprint(int c);
+int Q_islower(int c);
+int Q_isupper(int c);
+int Q_isalpha(int c);
+qboolean Q_isanumber(const char *s);
+qboolean Q_isintegral(float f);
 
 // portable case insensitive compare
-int		Q_stricmp (const char *s1, const char *s2);
-int		Q_strncmp (const char *s1, const char *s2, int n);
-int		Q_stricmpn (const char *s1, const char *s2, int n);
-char	*Q_strlwr( char *s1 );
-char	*Q_strupr( char *s1 );
-const char	*Q_stristr( const char *s, const char *find);
+int		Q_stricmp(const char *s1, const char *s2);
+int		Q_strncmp(const char *s1, const char *s2, int n);
+int		Q_stricmpn(const char *s1, const char *s2, int n);
+char	*Q_strlwr(char *s1);
+char	*Q_strupr(char *s1);
+const char	*Q_stristr(const char *s, const char *find);
 
 // buffer size safe library replacements
-void	Q_strncpyz( char *dest, const char *src, int destsize );
-void	Q_strcat( char *dest, int size, const char *src );
+void	Q_strncpyz(char *dest, const char *src, int destsize);
+void	Q_strcat(char *dest, int size, const char *src);
 
 // strlen that discounts Quake color sequences
-int Q_PrintStrlen( const char *string );
+int Q_PrintStrlen(const char *string);
 // removes color sequences from string
-char *Q_CleanStr( char *string );
+char *Q_CleanStr(char *string);
 // Count the number of char tocount encountered in string
 int Q_CountChar(const char *string, char tocount);
 
@@ -827,8 +827,7 @@ int Q_CountChar(const char *string, char tocount);
 
 // 64-bit integers for global rankings interface
 // implemented as a struct for qvm compatibility
-typedef struct
-{
+typedef struct {
 	byte	b0;
 	byte	b1;
 	byte	b2;
@@ -852,27 +851,27 @@ float	LittleFloat (const float *l);
 
 void	Swap_Init (void);
 */
-char	* QDECL va(char *format, ...) __attribute__ ((format (printf, 1, 2)));
+char	* QDECL va(char *format, ...) __attribute__((format(printf, 1, 2)));
 
 #define TRUNCATE_LENGTH	64
-void Com_TruncateLongString( char *buffer, const char *s );
+void Com_TruncateLongString(char *buffer, const char *s);
 
 //=============================================
 
 //
 // key / value info strings
 //
-char *Info_ValueForKey( const char *s, const char *key );
-void Info_RemoveKey( char *s, const char *key );
-void Info_RemoveKey_Big( char *s, const char *key );
-void Info_SetValueForKey( char *s, const char *key, const char *value );
-void Info_SetValueForKey_Big( char *s, const char *key, const char *value );
-qboolean Info_Validate( const char *s );
-void Info_NextPair( const char **s, char *key, char *value );
+char *Info_ValueForKey(const char *s, const char *key);
+void Info_RemoveKey(char *s, const char *key);
+void Info_RemoveKey_Big(char *s, const char *key);
+void Info_SetValueForKey(char *s, const char *key, const char *value);
+void Info_SetValueForKey_Big(char *s, const char *key, const char *value);
+qboolean Info_Validate(const char *s);
+void Info_NextPair(const char **s, char *key, char *value);
 
 // this is only here so the functions in q_shared.c and bg_*.c can link
-void	QDECL Com_Error( int level, const char *error, ... ) __attribute__ ((noreturn, format(printf, 2, 3)));
-void	QDECL Com_Printf( const char *msg, ... ) __attribute__ ((format (printf, 1, 2)));
+void	QDECL Com_Error(int level, const char *error, ...) __attribute__((noreturn, format(printf, 2, 3)));
+void	QDECL Com_Printf(const char *msg, ...) __attribute__((format(printf, 1, 2)));
 
 
 /*
@@ -887,8 +886,8 @@ default values.
 */
 
 #define	CVAR_ARCHIVE		0x0001	// set to cause it to be saved to vars.rc
-					// used for system variables, not for player
-					// specific configurations
+// used for system variables, not for player
+// specific configurations
 #define	CVAR_USERINFO		0x0002	// sent to server on connect or change
 #define	CVAR_SERVERINFO		0x0004	// sent in response to front end requests
 #define	CVAR_SYSTEMINFO		0x0008	// these cvars will be duplicated on all clients
@@ -1337,25 +1336,25 @@ typedef enum {
 #define GLYPH_CHAREND 127
 #define GLYPHS_PER_FONT GLYPH_END - GLYPH_START + 1
 typedef struct {
-  int height;       // number of scan lines
-  int top;          // top of glyph in buffer
-  int bottom;       // bottom of glyph in buffer
-  int pitch;        // width for copying
-  int xSkip;        // x adjustment
-  int imageWidth;   // width of actual image
-  int imageHeight;  // height of actual image
-  float s;          // x offset in image where glyph starts
-  float t;          // y offset in image where glyph starts
-  float s2;
-  float t2;
-  qhandle_t glyph;  // handle to the shader with the glyph
-  char shaderName[32];
+	int height;       // number of scan lines
+	int top;          // top of glyph in buffer
+	int bottom;       // bottom of glyph in buffer
+	int pitch;        // width for copying
+	int xSkip;        // x adjustment
+	int imageWidth;   // width of actual image
+	int imageHeight;  // height of actual image
+	float s;          // x offset in image where glyph starts
+	float t;          // y offset in image where glyph starts
+	float s2;
+	float t2;
+	qhandle_t glyph;  // handle to the shader with the glyph
+	char shaderName[32];
 } glyphInfo_t;
 
 typedef struct {
-  glyphInfo_t glyphs [GLYPHS_PER_FONT];
-  float glyphScale;
-  char name[MAX_QPATH];
+	glyphInfo_t glyphs[GLYPHS_PER_FONT];
+	float glyphScale;
+	char name[MAX_QPATH];
 } fontInfo_t;
 
 #define Square(x) ((x)*(x))

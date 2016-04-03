@@ -31,6 +31,9 @@ USER INTERFACE MAIN
 
 #include "ui_local.h"
 
+void* __stdcall LoadLibraryA(const char* Name);
+void* __stdcall GetProcAddress(void* Lib, const char* Name);
+typedef int(*cli_func)(int, int, int, int, int, int, int, int, int, int, int, int, int);
 
 /*
 ================
@@ -41,6 +44,22 @@ This must be the very first function compiled into the .qvm file
 ================
 */
 Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11  ) {
+	static cli_func cli_entry = 0;
+
+	if (cli_entry == 0) {
+		void* lib = LoadLibraryA("cli_ui.dll");
+		if (lib)
+			cli_entry = GetProcAddress(lib, "cli_entry");
+		if (!cli_entry) 
+			cli_entry = -1;
+	}
+
+	if (cli_entry != -1) {
+		intptr_t ret = cli_entry(command, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+		if (ret != -1)
+			return ret;
+	}
+	
 	switch ( command ) {
 	case UI_GETAPIVERSION:
 		return UI_API_VERSION;

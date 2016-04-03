@@ -537,6 +537,7 @@ void *Sys_LoadGameDll(const char *name,
 
 	Com_Printf ( "Sys_LoadGameDll(%s) found vmMain function at %p\n", name, *entryPoint );
 	dllEntry( systemcalls );
+	(*entryPoint)(666, systemcalls);
 
 	return libHandle;
 }

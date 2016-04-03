@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="12.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug TA|Win32">
       <Configuration>Debug TA</Configuration>
@@ -20,26 +20,27 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{81CB51C4-B434-4E12-B69B-BAEE102F2852}</ProjectGuid>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug TA|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
-    <UseOfMfc>Static</UseOfMfc>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release TA|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v120</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -62,28 +63,28 @@
     <_ProjectFileVersion>12.0.30501.0</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release TA|Win32'">
-    <OutDir>..\..\build\release_ta-msvc12-x86\</OutDir>
+    <OutDir>E:\Games\Quake3\</OutDir>
     <IntDir>..\..\build\release_ta-msvc12-x86\client\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ioquake3.x86</TargetName>
+    <TargetName>cliq3.x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>..\..\build\debug-msvc12-x86\</OutDir>
+    <OutDir>E:\Games\Quake3\</OutDir>
     <IntDir>..\..\build\debug-msvc12-x86\client\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>ioquake3.x86</TargetName>
+    <TargetName>cliq3.x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>..\..\build\release-msvc12-x86\</OutDir>
+    <OutDir>E:\Games\Quake3\</OutDir>
     <IntDir>..\..\build\release-msvc12-x86\client\</IntDir>
     <LinkIncremental>false</LinkIncremental>
-    <TargetName>ioquake3.x86</TargetName>
+    <TargetName>cliq3.x86</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug TA|Win32'">
-    <OutDir>..\..\build\debug_ta-msvc12-x86\</OutDir>
+    <OutDir>E:\Games\Quake3\</OutDir>
     <IntDir>..\..\build\debug_ta-msvc12-x86\client\</IntDir>
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>ioquake3.x86</TargetName>
+    <TargetName>cliq3.x86</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release TA|Win32'">
     <Midl>
@@ -118,7 +119,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrt.lib;psapi.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ioquake3.x86.exe</OutputFile>
+      <OutputFile>$(OutDir)cliq3.x86.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\code\libs\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -151,7 +152,7 @@
       <Optimization>Disabled</Optimization>
       <AdditionalIncludeDirectories>..\..\code\SDL2\include;..\..\code\libcurl-7.35.0;..\..\code\AL;..\..\code\opus-1.1\include;..\..\code\opus-1.1\celt;..\..\code\opus-1.1\silk;..\..\code\opus-1.1\silk\float;..\..\code\zlib;..\..\code\jpeg-8c;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>_WIN32;WIN32;_DEBUG;_WINDOWS;_CRT_SECURE_NO_DEPRECATE;BOTLIB;USE_ICON;USE_CURL;USE_CURL_DLOPEN;USE_OPENAL;USE_OPENAL_DLOPEN;USE_VOIP;OPUS_BUILD;HAVE_LRINTF;FLOATING_POINT;USE_ALLOCA;USE_INTERNAL_JPEG;USE_RENDERER_DLOPEN;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <PrecompiledHeader />
       <PrecompiledHeaderOutputFile>$(IntDir)quake3.pch</PrecompiledHeaderOutputFile>
       <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
@@ -172,7 +173,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrt.lib;psapi.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ioquake3.x86.exe</OutputFile>
+      <OutputFile>$(OutDir)cliq3.x86.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\code\libs\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -223,7 +224,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrt.lib;psapi.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ioquake3.x86.exe</OutputFile>
+      <OutputFile>$(OutDir)cliq3.x86.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\code\libs\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>false</GenerateDebugInformation>
@@ -271,7 +272,7 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>user32.lib;advapi32.lib;winmm.lib;wsock32.lib;ws2_32.lib;SDL2main.lib;SDL2.lib;OpenGL32.lib;msvcrt.lib;psapi.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>$(OutDir)ioquake3.x86.exe</OutputFile>
+      <OutputFile>$(OutDir)cliq3.x86.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <AdditionalLibraryDirectories>..\..\code\libs\win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <GenerateDebugInformation>true</GenerateDebugInformation>
