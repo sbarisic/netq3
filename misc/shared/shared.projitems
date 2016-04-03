@@ -9,11 +9,13 @@
     <Import_RootNamespace>cli_shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\Shared.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)API\UI.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Native\CGame.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ObjectMarshal.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Quake.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)EntryPoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Structs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SYSCALL.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Shared.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)UI.cs" />
   </ItemGroup>
 </Project>

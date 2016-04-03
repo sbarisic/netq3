@@ -1234,8 +1234,8 @@ void CG_DrawActiveFrame( int serverTime, stereoFrame_t stereoView, qboolean demo
 // cg_drawtools.c
 //
 void CG_AdjustFrom640( float *x, float *y, float *w, float *h );
-void CG_FillRect( float x, float y, float width, float height, const float *color );
-void CG_DrawPic( float x, float y, float width, float height, qhandle_t hShader );
+Q_EXPORT void CG_FillRect( float x, float y, float width, float height, const float *color );
+Q_EXPORT void CG_DrawPic( float x, float y, float width, float height, qhandle_t hShader );
 void CG_DrawString( float x, float y, const char *string, 
 				   float charWidth, float charHeight, const float *modulate );
 
@@ -1255,10 +1255,10 @@ void CG_TileClear( void );
 void CG_ColorForHealth( vec4_t hcolor );
 void CG_GetColorForHealth( int health, int armor, vec4_t hcolor );
 
-void UI_DrawProportionalString( int x, int y, const char* str, int style, vec4_t color );
-void CG_DrawRect( float x, float y, float width, float height, float size, const float *color );
-void CG_DrawSides(float x, float y, float w, float h, float size);
-void CG_DrawTopBottom(float x, float y, float w, float h, float size);
+Q_EXPORT void UI_DrawProportionalString( int x, int y, const char* str, int style, vec4_t color );
+Q_EXPORT void CG_DrawRect( float x, float y, float width, float height, float size, const float *color );
+Q_EXPORT void CG_DrawSides(float x, float y, float w, float h, float size);
+Q_EXPORT void CG_DrawTopBottom(float x, float y, float w, float h, float size);
 
 
 //
@@ -1274,7 +1274,7 @@ extern  char teamChat2[256];
 void CG_AddLagometerFrameInfo( void );
 void CG_AddLagometerSnapshotInfo( snapshot_t *snap );
 void CG_CenterPrint( const char *str, int y, int charWidth );
-void CG_DrawHead( float x, float y, float w, float h, int clientNum, vec3_t headAngles );
+Q_EXPORT void CG_DrawHead( float x, float y, float w, float h, int clientNum, vec3_t headAngles );
 void CG_DrawActive( stereoFrame_t stereoView );
 void CG_DrawFlagModel( float x, float y, float w, float h, int team, qboolean force2D );
 void CG_DrawTeamBackground( int x, int y, int w, int h, float alpha, int team );

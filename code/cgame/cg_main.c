@@ -38,15 +38,7 @@ void* __stdcall LoadLibraryA(const char* Name);
 void* __stdcall GetProcAddress(void* Lib, const char* Name);
 typedef int(*cli_func)(int, int, int, int, int, int, int, int, int, int, int, int, int);
 
-/*
-================
-vmMain
-
-This is the only way control passes into the module.
-This must be the very first function compiled into the .q3vm file
-================
-*/
-Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11  ) {
+int call_cli_entry(int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11) {
 	static cli_func cli_entry = 0;
 
 	if (cli_entry == 0) {
@@ -57,11 +49,23 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 			cli_entry = -1;
 	}
 
-	if (cli_entry != -1) {
-		intptr_t ret = cli_entry(command, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
-		if (ret != -1)
-			return ret;
-	}
+	if (cli_entry != -1) 
+		return cli_entry(command, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+	return -1;
+}
+
+/*
+================
+vmMain
+
+This is the only way control passes into the module.
+This must be the very first function compiled into the .q3vm file
+================
+*/
+Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, int arg4, int arg5, int arg6, int arg7, int arg8, int arg9, int arg10, int arg11  ) {
+	int ret = call_cli_entry(command, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
+	if (ret != -1)
+		return ret;
 
 	switch ( command ) {
 	case CG_INIT:
@@ -74,7 +78,7 @@ Q_EXPORT intptr_t vmMain( int command, int arg0, int arg1, int arg2, int arg3, i
 		return CG_ConsoleCommand();
 	case CG_DRAW_ACTIVE_FRAME:
 		CG_DrawActiveFrame( arg0, arg1, arg2 );
-		return 0;
+		return call_cli_entry(CG_DRAW_ACTIVE_FRAME_COMPLETED, arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11);
 	case CG_CROSSHAIR_PLAYER:
 		return CG_CrosshairPlayer();
 	case CG_LAST_ATTACKER:

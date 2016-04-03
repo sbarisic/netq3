@@ -14,37 +14,34 @@ using cli_ui;
 #endif
 
 namespace cli_shared {
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-	public delegate int sf_string(SYSCALL A, string B);
-
-	[UnmanagedFunctionPointer(CallingConvention.Cdecl, CharSet = CharSet.Ansi)]
-	public unsafe delegate int sf_cvar_string_string_int(SYSCALL A, vmCvar* CVar, string VarName, string Value, int Flags);
-	
 	public static class EntryPoint {
-		public static IntPtr SyscallPtr;
-		public static sf_string Syscall_string;
-		public static sf_cvar_string_string_int Syscall_cvar_string_string_int;
-		
 		[DllExport(CallingConvention = CallingConvention.Cdecl)]
 		public static int cli_entry(EntryCmd Cmd, int A0, int A1, int A2, int A3, int A4, int A5, int A6, int A7, int A8, int A9, int A10, int A11) {
-			try {
-				if (Cmd == EntryCmd.INIT_SYSCALLPTR) {
-					SyscallPtr = (IntPtr)A0;
-					Syscall_string = GetProc<sf_string>();
-					Syscall_cvar_string_string_int = GetProc<sf_cvar_string_string_int>();
-					
-					return -1;
-				}
+			if (Cmd == EntryCmd.INIT_SYSCALLPTR) {
+				Quake.SyscallPtr = (IntPtr)A0;
 
-				return Entry.VmMain(Cmd, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
-			} catch (Exception E) {
-				File.AppendAllText("Exceptions.txt", E.ToString());
+				CreateDelegate(ref Quake.S0, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S1, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S2, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S3, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S4, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S5, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S6, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S7, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S8, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S9, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S10, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S11, Quake.SyscallPtr);
+				CreateDelegate(ref Quake.S12, Quake.SyscallPtr);
+
+				return 0;
 			}
-			return -1;
+
+			return Entry.VmMain(Cmd, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A10, A11);
 		}
 
-		static T GetProc<T>() where T : class {
-			return (T)(object)Marshal.GetDelegateForFunctionPointer(SyscallPtr, typeof(T));
+		static void CreateDelegate<T>(ref T O, IntPtr FuncPtr) where T : class {
+			O = (T)(object)Marshal.GetDelegateForFunctionPointer(FuncPtr, typeof(T));
 		}
 	}
 
@@ -72,7 +69,7 @@ namespace cli_shared {
 										// The game can issue trap_argc() / trap_argv() commands to get the command
 										// and parameters.  Return qfalse if the game doesn't recognize it as a command.
 
-		BOTAI_START_FRAME               // ( int time );
+		BOTAI_START_FRAME ,             // ( int time );
 #elif CGAME
 		CG_INIT,
 		//	void CG_Init( int serverMessageNum, int serverCommandSequence, int clientNum )
@@ -103,7 +100,9 @@ namespace cli_shared {
 		CG_LAST_ATTACKER,//	int (*CG_LastAttacker)( void );
 		CG_KEY_EVENT, //	void	(*CG_KeyEvent)( int key, qboolean down );
 		CG_MOUSE_EVENT,//	void	(*CG_MouseEvent)( int dx, int dy );
-		CG_EVENT_HANDLING//	void (*CG_EventHandling)(int type);
+		CG_EVENT_HANDLING, //	void (*CG_EventHandling)(int type);
+
+		CG_DRAW_ACTIVE_FRAME_COMPLETED,
 #elif UI
 		UI_GETAPIVERSION = 0,   // system reserved
 		UI_INIT,    //	void	UI_Init( void );
@@ -115,12 +114,12 @@ namespace cli_shared {
 		UI_SET_ACTIVE_MENU,     //	void	UI_SetActiveMenu( uiMenuCommand_t menu );
 		UI_CONSOLE_COMMAND,     //	qboolean UI_ConsoleCommand( int realTime );
 		UI_DRAW_CONNECT_SCREEN,     //	void	UI_DrawConnectScreen( qboolean overlay );
-		UI_HASUNIQUECDKEY
+		UI_HASUNIQUECDKEY,
 		// if !overlay, the background will be drawn, otherwise it will be
 		// overlayed over whatever the cgame has drawn.
 		// a GetClientState syscall will be made to get the current strings
 #endif
-		,
+
 		INIT_SYSCALLPTR = 666,
 	}
 }
