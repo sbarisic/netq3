@@ -619,6 +619,8 @@ void UI_SPPostgameMenu_f( void );
 void UI_SPSkillMenu( const char *arenaInfo );
 void UI_SPSkillMenu_Cache( void );
 
+Q_EXPORT void UI_GetPlayerHead(qhandle_t* HeadModel, qhandle_t* HeadSkin);
+
 //
 // ui_syscalls.c
 //

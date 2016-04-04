@@ -102,5 +102,9 @@ namespace cli_shared {
 		public static void Free(IntPtr Ptr) {
 			Marshal.FreeHGlobal(Ptr);
 		}
+
+		public static string ToString(IntPtr Ptr) {
+			return Marshal.PtrToStringAnsi(Ptr);
+		}
 	}
 }

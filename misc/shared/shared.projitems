@@ -9,6 +9,7 @@
     <Import_RootNamespace>cli_shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)API\CVar.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\Shared.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)API\UI.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Native\CGame.cs" />

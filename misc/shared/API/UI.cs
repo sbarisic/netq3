@@ -6,13 +6,6 @@ using System.Text;
 namespace cli_shared.API {
 #if UI
 	public unsafe static class UI {
-		public static void CVar_Register(ref vmCvar CVar, string Name, string Value, int Flags = 0) {
-			fixed (vmCvar* CVarPtr = &CVar)
-			{
-				Quake.Syscall(SYSCALL.UI_CVAR_REGISTER, new IntPtr(CVarPtr), Name, Value, Flags);
-			}
-		}
-
 		public static int ArgC() {
 			return Quake.Syscall(SYSCALL.UI_ARGC);
 		}

@@ -1149,6 +1149,7 @@ void UI_PlayerInfo_SetInfo( playerInfo_t *pi, int legsAnim, int torsoAnim, vec3_
 	int			c;
 
 	pi->chat = chat;
+	UI_GetPlayerHead(&pi->headModel, &pi->headSkin);
 
 	c = (int)trap_Cvar_VariableValue( "color1" );
  
