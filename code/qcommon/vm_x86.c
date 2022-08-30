@@ -42,6 +42,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
   #endif
 #endif
 
+#if defined (__i386__) || defined(__x86_64__) || defined(_M_IX86) || defined(_M_X64)
 static void VM_Destroy_Compiled(vm_t* self);
 
 /*
@@ -103,7 +104,7 @@ static int isu8(uint32_t v)
 
 static int NextConstant4(void)
 {
-	return (code[pc] | (code[pc+1]<<8) | (code[pc+2]<<16) | (code[pc+3]<<24));
+	return ((unsigned int)code[pc] | ((unsigned int)code[pc+1]<<8) | ((unsigned int)code[pc+2]<<16) | ((unsigned int)code[pc+3]<<24));
 }
 
 static int	Constant4( void ) {
@@ -790,7 +791,7 @@ qboolean ConstOptimize(vm_t *vm, int callProcOfsSyscall)
 		return qtrue;
 
 	case OP_STORE4:
-		EmitMovEAXStack(vm, (vm->dataMask & ~3));
+		EmitMovEAXStack(vm, vm->dataMask);
 #if idx64
 		EmitRexString(0x41, "C7 04 01");		// mov dword ptr [r9 + eax], 0x12345678
 		Emit4(Constant4());
@@ -805,7 +806,7 @@ qboolean ConstOptimize(vm_t *vm, int callProcOfsSyscall)
 		return qtrue;
 
 	case OP_STORE2:
-		EmitMovEAXStack(vm, (vm->dataMask & ~1));
+		EmitMovEAXStack(vm, vm->dataMask);
 #if idx64
 		Emit1(0x66);					// mov word ptr [r9 + eax], 0x1234
 		EmitRexString(0x41, "C7 04 01");
@@ -1377,7 +1378,7 @@ void VM_Compile(vm_t *vm, vmHeader_t *header)
 		case OP_STORE4:
 			EmitMovEAXStack(vm, 0);	
 			EmitString("8B 54 9F FC");			// mov edx, dword ptr -4[edi + ebx * 4]
-			MASK_REG("E2", vm->dataMask & ~3);		// and edx, 0x12345678
+			MASK_REG("E2", vm->dataMask);		// and edx, 0x12345678
 #if idx64
 			EmitRexString(0x41, "89 04 11");		// mov dword ptr [r9 + edx], eax
 #else
@@ -1389,7 +1390,7 @@ void VM_Compile(vm_t *vm, vmHeader_t *header)
 		case OP_STORE2:
 			EmitMovEAXStack(vm, 0);	
 			EmitString("8B 54 9F FC");			// mov edx, dword ptr -4[edi + ebx * 4]
-			MASK_REG("E2", vm->dataMask & ~1);		// and edx, 0x12345678
+			MASK_REG("E2", vm->dataMask);		// and edx, 0x12345678
 #if idx64
 			Emit1(0x66);					// mov word ptr [r9 + edx], eax
 			EmitRexString(0x41, "89 04 11");
@@ -1807,3 +1808,4 @@ int VM_CallCompiled(vm_t *vm, int *args)
 
 	return opStack[opStackOfs];
 }
+#endif
