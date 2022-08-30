@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using RGiesecke.DllExport;
 using System.Runtime.InteropServices;
 using System.IO;
 
@@ -15,7 +14,9 @@ using cli_ui;
 
 namespace cli_shared {
 	public static class EntryPoint {
-		[DllExport(CallingConvention = CallingConvention.Cdecl)]
+		//[DllExport(CallingConvention = CallingConvention.Cdecl)]
+
+
 		public static int cli_entry(EntryCmd Cmd, int A0, int A1, int A2, int A3, int A4, int A5, int A6, int A7, int A8, int A9, int A10, int A11) {
 			if (Cmd == EntryCmd.INIT_SYSCALLPTR) {
 				Quake.SyscallPtr = (IntPtr)A0;
