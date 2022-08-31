@@ -182,7 +182,13 @@ typedef enum {
 	CG_CEIL,
 	CG_TESTPRINTINT,
 	CG_TESTPRINTFLOAT,
-	CG_ACOS
+	CG_ACOS,
+
+	// New
+	CG_NEW_UNUSED=199,
+	//CG_R_BEGIN2D,
+	//CG_R_END2D,
+	//CG_R_DRAWTRANSFORMPIC
 } cgameImport_t;
 
 

@@ -99,6 +99,9 @@ typedef struct {
 	qboolean (*inPVS)( const vec3_t p1, const vec3_t p2 );
 
 	void (*TakeVideoFrame)( int h, int w, byte* captureBuffer, byte *encodeBuffer, qboolean motionJpeg );
+
+	// New
+	//void	(*DrawTransformPic) (float x, float y, float w, float h, float s1, float t1, float s2, float t2, float r, qhandle_t hShader);	// 0 = white
 } refexport_t;
 
 //

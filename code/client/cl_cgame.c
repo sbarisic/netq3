@@ -693,6 +693,11 @@ intptr_t CL_CgameSystemCalls( intptr_t *args ) {
 	case CG_R_INPVS:
 		return re.inPVS( VMA(1), VMA(2) );
 
+		// New
+	/*case CG_R_DRAWTRANSFORMPIC:
+		re.DrawTransformPic(VMF(1), VMF(2), VMF(3), VMF(4), VMF(5), VMF(6), VMF(7), VMF(8), VMF(9), args[10]);
+		return 0;*/
+
 	default:
 	        assert(0);
 		Com_Error( ERR_DROP, "Bad cgame system trap: %ld", (long int) args[0] );
@@ -712,7 +717,7 @@ void CL_InitCGame( void ) {
 	const char			*info;
 	const char			*mapname;
 	int					t1, t2;
-	vmInterpret_t		interpret;
+	vmInterpret_t		interpret = VMI_NATIVE;
 
 	t1 = Sys_Milliseconds();
 
@@ -725,13 +730,13 @@ void CL_InitCGame( void ) {
 	Com_sprintf( cl.mapname, sizeof( cl.mapname ), "maps/%s.bsp", mapname );
 
 	// load the dll or bytecode
-	interpret = Cvar_VariableValue("vm_cgame");
+	/*interpret = Cvar_VariableValue("vm_cgame");
 	if(cl_connectedToPureServer)
 	{
 		// if sv_pure is set we only allow qvms to be loaded
 		if(interpret != VMI_COMPILED && interpret != VMI_BYTECODE)
 			interpret = VMI_COMPILED;
-	}
+	}*/
 
 	cgvm = VM_Create( "cgame", CL_CgameSystemCalls, interpret );
 	if ( !cgvm ) {

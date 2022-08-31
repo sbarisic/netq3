@@ -27,6 +27,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #endif
 
 #include "cg_local.h"
+vec4_t	lastcolor;
 
 static intptr_t (QDECL *syscall)( intptr_t arg, ... ) = (intptr_t (QDECL *)( intptr_t, ...))-1;
 
@@ -282,8 +283,17 @@ void	trap_R_RenderScene( const refdef_t *fd ) {
 	syscall( CG_R_RENDERSCENE, fd );
 }
 
-void	trap_R_SetColor( const float *rgba ) {
-	syscall( CG_R_SETCOLOR, rgba );
+void	trap_R_SetColor(const float* rgba) {
+	if (rgba != NULL) {
+		lastcolor[0] = rgba[0];
+		lastcolor[1] = rgba[1];
+		lastcolor[2] = rgba[2];
+		lastcolor[3] = rgba[3];
+	} else {
+		lastcolor[0] = lastcolor[1] = lastcolor[2] = lastcolor[3] = 1;
+	}
+
+	syscall(CG_R_SETCOLOR, rgba);
 }
 
 void	trap_R_DrawStretchPic( float x, float y, float w, float h, 
@@ -446,3 +456,24 @@ qboolean trap_GetEntityToken( char *buffer, int bufferSize ) {
 qboolean trap_R_inPVS( const vec3_t p1, const vec3_t p2 ) {
 	return syscall( CG_R_INPVS, p1, p2 );
 }
+
+// NEW
+
+void trap_R_GetColor(vec4_t color) {
+	color[0] = lastcolor[0];
+	color[1] = lastcolor[1];
+	color[2] = lastcolor[2];
+	color[3] = lastcolor[3];
+}
+
+/*void trap_R_DrawTransformPic(float x, float y, float w, float h, float s1, float t1, float s2, float t2, float r, qhandle_t hShader) {
+	syscall(CG_R_DRAWTRANSFORMPIC, PASSFLOAT(x), PASSFLOAT(y), PASSFLOAT(w), PASSFLOAT(h), PASSFLOAT(s1), PASSFLOAT(t1), PASSFLOAT(s2), PASSFLOAT(t2), PASSFLOAT(r), hShader);
+}
+
+void trap_R_Begin2D(void) {
+	syscall(CG_R_BEGIN2D);
+}
+
+void trap_R_End2D(void) {
+	syscall(CG_R_END2D);
+}*/

@@ -1686,4 +1686,8 @@ void	CG_ParticleExplosion (char *animStr, vec3_t origin, vec3_t vel, int duratio
 extern qboolean		initparticles;
 int CG_NewParticleArea ( int num );
 
-
+// New traps
+void		trap_R_GetColor(vec4_t color);
+//void		trap_R_DrawTransformPic(float x, float y, float w, float h, float s1, float t1, float s2, float t2, float r, qhandle_t hShader);
+//void		trap_R_Begin2D(void);
+//void		trap_R_End2D(void);

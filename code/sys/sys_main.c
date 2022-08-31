@@ -47,6 +47,8 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 
+#include <Windows.h>
+
 static char binaryPath[ MAX_OSPATH ] = { 0 };
 static char installPath[ MAX_OSPATH ] = { 0 };
 
@@ -692,8 +694,11 @@ int main( int argc, char **argv )
 	int   i;
 	char  commandLine[ MAX_STRING_CHARS ] = { 0 };
 
-	extern void Sys_LaunchAutoupdater(int argc, char **argv);
-	Sys_LaunchAutoupdater(argc, argv);
+	//extern void Sys_LaunchAutoupdater(int argc, char **argv);
+	//Sys_LaunchAutoupdater(argc, argv);
+
+	AllocConsole();
+	freopen("CONOUT$", "w", stdout);
 
 #ifndef DEDICATED
 	// SDL version check
