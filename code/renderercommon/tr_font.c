@@ -544,6 +544,9 @@ void R_InitFreeType(void) {
 	if (FT_Init_FreeType( &ftLibrary )) {
 		ri.Printf(PRINT_WARNING, "R_InitFreeType: Unable to initialize FreeType.\n");
 	}
+	else {
+		ri.Printf(PRINT_WARNING, "FreeType Loaded.\n");
+	}
 #endif
 	registeredFontCount = 0;
 }

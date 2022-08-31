@@ -268,9 +268,9 @@ void Sys_InitPIDFile( const char *gamedir ) {
 			"it didn't exit properly. This may be due to inappropriate video "
 			"settings. Would you like to start with \"safe\" video settings?", modName );
 
-		if( Sys_Dialog( DT_YES_NO, message, "Abnormal Exit" ) == DR_YES ) {
+		/*if (Sys_Dialog(DT_YES_NO, message, "Abnormal Exit") == DR_YES) {
 			Cvar_Set( "com_abnormalExit", "1" );
-		}
+		}*/
 #endif
 	}
 }
